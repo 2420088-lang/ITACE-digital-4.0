@@ -1,0 +1,1596 @@
+/* =========================================
+   1. CONFIGURACIÓN GENERAL
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --guinda: #702b46;
+    --guinda-oscuro: #4b1c30;
+    --dorado: #d7b56d;
+    --crema: #fff8ed;
+    --rosa: #f6dce6;
+    --lila: #e8e0f5;
+    --verde: #e2eddf;
+    --texto: #443b43;
+    --blanco: #ffffff;
+}
+
+body {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background: var(--crema);
+    color: var(--texto);
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: background 0.4s, color 0.4s;
+}
+
+img,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.3;
+}
+
+h2 {
+    color: var(--guinda);
+    margin-bottom: 18px;
+}
+
+h3 {
+    color: var(--guinda);
+    margin-bottom: 12px;
+}
+
+p {
+    margin-bottom: 14px;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================
+   2. BANNER PRINCIPAL
+========================================= */
+
+.portada {
+    position: relative;
+    isolation: isolate;
+
+    min-height: 540px;
+    padding: 125px 25px 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(75, 28, 48, 0.87),
+            rgba(112, 43, 70, 0.76)
+        ),
+        url("imagenes/banner.jpg");
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+/* Brillo decorativo */
+
+.portada::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(215, 181, 109, 0.20),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(246, 220, 230, 0.16),
+            transparent 35%
+        );
+}
+
+/* Logotipos */
+
+.logos {
+    position: absolute;
+    top: 22px;
+    left: 25px;
+    right: 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+}
+
+.logos img {
+    width: 78px;
+    height: 78px;
+
+    padding: 6px;
+
+    object-fit: contain;
+
+    background: white;
+    border: 2px solid var(--dorado);
+    border-radius: 18px;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+
+    transition: transform 0.3s;
+}
+
+.logos img:hover {
+    transform: scale(1.06) rotate(-2deg);
+}
+
+/* Contenido del banner */
+
+.contenido-portada {
+    width: 100%;
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    animation: aparecer 0.9s ease;
+}
+
+.portada .etiqueta {
+    color: var(--dorado);
+}
+
+.portada h1 {
+    color: white;
+
+    font-size: clamp(2.3rem, 6vw, 4.2rem);
+
+    margin: 15px 0 20px;
+
+    text-shadow: 3px 4px 12px rgba(0, 0, 0, 0.35);
+
+    animation: flotarTitulo 4s ease-in-out infinite;
+}
+
+.portada h2 {
+    color: white;
+
+    font-size: clamp(1.05rem, 2.7vw, 1.6rem);
+
+    max-width: 750px;
+    margin: 0 auto 20px;
+}
+
+.portada p {
+    max-width: 700px;
+    margin: 0 auto 22px;
+    font-size: 1.08rem;
+}
+
+.etiqueta {
+    display: inline-block;
+
+    color: var(--guinda);
+
+    font-size: 0.82rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    margin-bottom: 10px;
+}
+
+/* Adornos */
+
+.decoracion {
+    position: absolute;
+
+    color: var(--dorado);
+    font-size: 3rem;
+
+    pointer-events: none;
+
+    animation: girar 12s linear infinite;
+}
+
+.decoracion-1 {
+    left: 7%;
+    bottom: 35px;
+}
+
+.decoracion-2 {
+    right: 7%;
+    top: 42%;
+}
+
+
+/* =========================================
+   3. BOTONES
+========================================= */
+
+.boton {
+    display: inline-block;
+
+    padding: 12px 22px;
+    margin: 8px 5px;
+
+    border: 2px solid var(--guinda);
+    border-radius: 30px;
+
+    background: var(--guinda);
+    color: white;
+
+    text-decoration: none;
+    text-align: center;
+
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s,
+        color 0.3s,
+        transform 0.3s,
+        box-shadow 0.3s;
+}
+
+.boton:hover {
+    background: var(--dorado);
+    color: var(--guinda-oscuro);
+
+    border-color: var(--dorado);
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 7px 18px rgba(75, 28, 48, 0.18);
+}
+
+.boton-secundario {
+    background: transparent;
+    color: white;
+    border-color: white;
+}
+
+.boton-secundario:hover {
+    background: white;
+    color: var(--guinda);
+    border-color: white;
+}
+
+
+/* =========================================
+   4. MENÚ DE NAVEGACIÓN
+========================================= */
+
+.menu {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    padding: 12px 15px;
+
+    background: var(--guinda-oscuro);
+
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.16);
+}
+
+.menu a {
+    display: inline-block;
+
+    padding: 9px 12px;
+
+    border-radius: 15px;
+
+    color: white;
+    text-decoration: none;
+    text-align: center;
+
+    font-size: 0.88rem;
+    font-weight: bold;
+
+    transition:
+        background 0.3s,
+        color 0.3s,
+        transform 0.3s;
+}
+
+.menu a:hover,
+.menu a.activo {
+    background: var(--dorado);
+    color: var(--guinda-oscuro);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   5. SECCIONES GENERALES
+========================================= */
+
+.seccion {
+    width: min(1150px, 92%);
+
+    margin: 40px auto;
+    padding: 35px;
+
+    background: white;
+
+    border-radius: 25px;
+
+    box-shadow: 0 8px 25px rgba(76, 41, 58, 0.08);
+
+    scroll-margin-top: 100px;
+}
+
+.titulo-seccion {
+    max-width: 800px;
+
+    margin: 0 auto 30px;
+
+    text-align: center;
+}
+
+.titulo-seccion h2 {
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+}
+
+.titulo-seccion p {
+    max-width: 700px;
+    margin: 0 auto 14px;
+}
+
+.subtitulo {
+    margin: 35px 0 22px;
+
+    text-align: center;
+
+    color: var(--guinda);
+    font-size: 1.45rem;
+}
+
+.nota {
+    margin-top: 25px;
+    padding: 18px;
+
+    background: var(--crema);
+
+    border-left: 5px solid var(--dorado);
+    border-radius: 12px;
+
+    font-size: 0.93rem;
+}
+
+
+/* =========================================
+   6. PRESENTACIÓN DEL ITACE
+========================================= */
+
+.presentacion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    background: linear-gradient(
+        135deg,
+        white,
+        var(--rosa),
+        var(--lila)
+    );
+}
+
+.presentacion-texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.presentacion-texto h2 {
+    font-size: clamp(1.7rem, 4vw, 2.3rem);
+}
+
+.foto-presentacion {
+    width: 42%;
+    min-width: 250px;
+    height: 320px;
+
+    object-fit: cover;
+
+    border: 5px solid white;
+    border-radius: 45% 45% 20px 20px;
+
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+
+    transition: transform 0.4s;
+}
+
+.foto-presentacion:hover {
+    transform: scale(1.025);
+}
+
+
+/* =========================================
+   7. HISTORIA
+========================================= */
+
+.historia {
+    background: linear-gradient(
+        135deg,
+        white,
+        var(--verde)
+    );
+}
+
+.contenido-historia {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+.texto-historia {
+    flex: 1;
+    min-width: 0;
+}
+
+.gif-marco {
+    flex: 0 1 300px;
+    min-width: 0;
+}
+
+.gif-decorativo {
+    width: 100%;
+    max-height: 260px;
+
+    object-fit: contain;
+
+    border-radius: 22px;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.10);
+
+    animation: flotarSuave 4s ease-in-out infinite;
+}
+
+.contenido-oculto {
+    display: none;
+
+    margin-top: 15px;
+    padding: 18px;
+
+    border-radius: 15px;
+    background: var(--crema);
+}
+
+.contenido-oculto.visible {
+    display: block;
+    animation: aparecer 0.4s ease;
+}
+
+
+/* =========================================
+   8. TARJETAS
+========================================= */
+
+.tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: stretch;
+
+    gap: 24px;
+}
+
+.tarjeta {
+    flex: 1 1 260px;
+    max-width: 340px;
+    min-width: 0;
+
+    padding: 23px;
+
+    text-align: center;
+
+    background: white;
+
+    border: 1px solid #eee4e8;
+    border-bottom: 5px solid var(--dorado);
+    border-radius: 22px;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+
+    transition:
+        transform 0.35s,
+        box-shadow 0.35s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 12px 25px rgba(76, 41, 58, 0.15);
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 190px;
+
+    margin-bottom: 18px;
+
+    object-fit: cover;
+
+    border-radius: 15px;
+}
+
+.tarjeta h3 {
+    color: var(--guinda);
+    margin-bottom: 12px;
+}
+
+.tarjeta p {
+    font-size: 0.96rem;
+}
+
+.icono {
+    display: grid;
+    place-items: center;
+
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 20px;
+
+    background: var(--rosa);
+
+    border-radius: 50%;
+
+    font-size: 2.3rem;
+
+    transition: transform 0.3s;
+}
+
+.tarjeta:hover .icono {
+    transform: rotate(-5deg) scale(1.06);
+}
+
+/* Diferentes formas */
+
+.tarjeta-rombo .icono {
+    background: var(--rosa);
+    border-radius: 15px 30px 15px 30px;
+}
+
+.tarjeta-circular .icono {
+    background: var(--verde);
+    border-radius: 50%;
+}
+
+.tarjeta-corazon .icono {
+    background: var(--lila);
+    border-radius: 50% 50% 10px 10px;
+}
+
+.tarjeta-ovalada {
+    border-radius: 45px;
+}
+
+
+/* =========================================
+   9. ESPECIALIDADES
+========================================= */
+
+.especialidades {
+    background: linear-gradient(
+        135deg,
+        var(--crema),
+        var(--lila)
+    );
+}
+
+.especialidades .tarjeta {
+    border-top: 3px solid rgba(112, 43, 70, 0.10);
+}
+
+.gif-especialidades {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 30px;
+}
+
+.gif-especialidades img {
+    width: 160px;
+    max-height: 160px;
+
+    object-fit: contain;
+
+    border-radius: 20px;
+}
+
+
+/* =========================================
+   10. CLUBES
+========================================= */
+
+.clubes {
+    background: linear-gradient(
+        135deg,
+        var(--verde),
+        white
+    );
+}
+
+
+/* =========================================
+   11. INSTALACIONES
+========================================= */
+
+.instalaciones {
+    background: #fffdfb;
+}
+
+.instalaciones .tarjeta {
+    border-bottom-color: var(--guinda);
+}
+
+.instalaciones .tarjeta img {
+    height: 200px;
+}
+
+
+/* =========================================
+   12. GALERÍA
+========================================= */
+
+.galeria {
+    background: linear-gradient(
+        135deg,
+        var(--lila),
+        var(--rosa)
+    );
+}
+
+.fotos {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.fotos figure {
+    min-width: 0;
+    overflow: hidden;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.fotos figure:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 22px rgba(75, 28, 48, 0.15);
+}
+
+.fotos img {
+    width: 100%;
+    height: 210px;
+
+    object-fit: cover;
+
+    transition: transform 0.4s;
+}
+
+.fotos figure:hover img {
+    transform: scale(1.06);
+}
+
+.fotos figcaption {
+    padding: 13px;
+
+    color: var(--guinda);
+
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* =========================================
+   13. MULTIMEDIA
+========================================= */
+
+.multimedia {
+    background: linear-gradient(
+        135deg,
+        white,
+        var(--verde)
+    );
+}
+
+.tarjeta-video {
+    flex: 1 1 350px;
+}
+
+.tarjeta-video video {
+    width: 100%;
+    height: auto;
+
+    margin-top: 12px;
+
+    border-radius: 15px;
+    background: #211a20;
+}
+
+.gif-galeria {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.gif-tarjeta {
+    min-width: 0;
+
+    padding: 13px;
+
+    text-align: center;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+}
+
+.gif-tarjeta img {
+    width: 100%;
+    height: 140px;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+}
+
+.gif-tarjeta figcaption {
+    margin-top: 10px;
+
+    color: var(--guinda);
+
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   14. CURIOSIDADES
+========================================= */
+
+.curiosidades {
+    background: linear-gradient(
+        135deg,
+        var(--crema),
+        var(--rosa)
+    );
+
+    text-align: center;
+}
+
+.lista-curiosidades {
+    max-width: 850px;
+
+    margin: 0 auto 25px;
+
+    list-style: none;
+    text-align: left;
+}
+
+.lista-curiosidades li {
+    position: relative;
+
+    margin-bottom: 12px;
+    padding: 15px 18px 15px 45px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    transition: transform 0.3s;
+}
+
+.lista-curiosidades li:hover {
+    transform: translateX(4px);
+}
+
+.lista-curiosidades li::before {
+    content: "✦";
+
+    position: absolute;
+    left: 17px;
+
+    color: var(--guinda);
+
+    font-size: 1.2rem;
+}
+
+.dato-curioso {
+    max-width: 700px;
+
+    margin: 20px auto 0;
+    padding: 20px;
+
+    background: white;
+
+    border: 2px dashed var(--dorado);
+    border-radius: 18px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   15. OPINIÓN
+========================================= */
+
+.opinion {
+    background: linear-gradient(
+        135deg,
+        var(--rosa),
+        white
+    );
+}
+
+.opinion-tarjeta {
+    max-width: 850px;
+
+    margin: 0 auto;
+    padding: 30px;
+
+    background: white;
+
+    border-radius: 12px 35px 12px 35px;
+    border-left: 6px solid var(--guinda);
+}
+
+.frase {
+    color: var(--guinda);
+
+    font-weight: bold;
+    font-style: italic;
+
+    text-align: center;
+    font-size: 1.1rem;
+
+    margin-top: 20px;
+}
+
+
+/* =========================================
+   16. LUGAR FAVORITO
+========================================= */
+
+.favorito {
+    background: linear-gradient(
+        135deg,
+        var(--lila),
+        white
+    );
+}
+
+.favorito-contenido {
+    display: flex;
+    align-items: center;
+
+    gap: 30px;
+}
+
+.favorito-contenido img {
+    width: 43%;
+    min-width: 0;
+    height: 300px;
+
+    object-fit: cover;
+
+    border-radius: 25px 65px 25px 65px;
+}
+
+.favorito-contenido div {
+    flex: 1;
+}
+
+
+/* =========================================
+   17. TABLA
+========================================= */
+
+.tabla-seccion {
+    background: white;
+}
+
+.tabla-contenedor {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    min-width: 700px;
+
+    border-collapse: collapse;
+
+    background: white;
+}
+
+th,
+td {
+    padding: 14px;
+
+    border: 1px solid #eadde2;
+
+    text-align: left;
+}
+
+th {
+    color: white;
+    background: var(--guinda);
+}
+
+tbody tr:nth-child(even) {
+    background: var(--rosa);
+}
+
+tbody tr:hover {
+    background: var(--verde);
+}
+
+
+/* =========================================
+   18. GENERACIÓN 502B
+========================================= */
+
+.homenaje {
+    position: relative;
+    overflow: hidden;
+
+    margin-top: 45px;
+    padding: 60px 25px;
+
+    text-align: center;
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        var(--guinda-oscuro),
+        var(--guinda),
+        #8c5265
+    );
+
+    border-top: 8px solid var(--dorado);
+
+    scroll-margin-top: 100px;
+}
+
+.homenaje .etiqueta {
+    color: var(--dorado);
+}
+
+.homenaje h1 {
+    color: var(--dorado);
+
+    font-size: clamp(4rem, 12vw, 7rem);
+
+    text-shadow: 3px 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.homenaje h2,
+.homenaje h3 {
+    color: white;
+}
+
+.homenaje > img:not(.gif-generacion) {
+    width: min(600px, 90%);
+    max-height: 380px;
+
+    object-fit: cover;
+
+    margin: 25px auto;
+
+    border: 5px solid var(--dorado);
+    border-radius: 25px;
+}
+
+.homenaje .frase {
+    color: var(--dorado);
+}
+
+.gif-generacion {
+    width: 140px;
+    max-height: 140px;
+
+    margin: 20px auto;
+
+    object-fit: contain;
+}
+
+
+/* =========================================
+   19. PIE DE PÁGINA
+========================================= */
+
+.final {
+    padding: 45px 20px;
+
+    background: #351521;
+    color: white;
+
+    text-align: center;
+}
+
+.final h2 {
+    color: var(--dorado);
+}
+
+.creditos {
+    max-width: 650px;
+
+    margin: 25px auto 0;
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.creditos p {
+    margin: 7px 0;
+}
+
+
+/* =========================================
+   20. BOTÓN VOLVER ARRIBA
+========================================= */
+
+.volver-arriba {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    z-index: 900;
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: var(--guinda);
+    color: white;
+
+    font-size: 1.7rem;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity 0.3s,
+        transform 0.3s,
+        background 0.3s;
+}
+
+.volver-arriba.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transform: translateY(0);
+}
+
+.volver-arriba:hover {
+    background: var(--dorado);
+    color: var(--guinda-oscuro);
+
+    transform: translateY(-5px);
+}
+
+
+/* =========================================
+   21. MODO OSCURO
+========================================= */
+
+body.modo-oscuro {
+    --crema: #211a20;
+    --texto: #f8edf2;
+
+    background: #211a20;
+    color: #f8edf2;
+}
+
+body.modo-oscuro .seccion,
+body.modo-oscuro .tarjeta,
+body.modo-oscuro .opinion-tarjeta,
+body.modo-oscuro .contenido-oculto,
+body.modo-oscuro .gif-tarjeta,
+body.modo-oscuro .dato-curioso,
+body.modo-oscuro .fotos figure {
+    background: #352833;
+    color: #f8edf2;
+}
+
+body.modo-oscuro .seccion h2,
+body.modo-oscuro .seccion h3,
+body.modo-oscuro .tarjeta h3 {
+    color: #f2c9d9;
+}
+
+body.modo-oscuro .nota {
+    background: #352833;
+    color: #f8edf2;
+}
+
+body.modo-oscuro .fotos figcaption,
+body.modo-oscuro .gif-tarjeta figcaption {
+    color: #f2c9d9;
+}
+
+body.modo-oscuro .lista-curiosidades li {
+    background: #352833;
+    color: #f8edf2;
+}
+
+body.modo-oscuro tbody tr:nth-child(even) {
+    background: #483541;
+}
+
+body.modo-oscuro tbody tr:hover {
+    background: #584454;
+}
+
+
+/* =========================================
+   22. ANIMACIONES
+========================================= */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes flotarTitulo {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes flotarSuave {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================
+   23. TABLETAS
+========================================= */
+
+@media (max-width: 900px) {
+
+    .portada {
+        min-height: 520px;
+    }
+
+    .menu {
+        gap: 3px;
+        padding: 9px;
+    }
+
+    .menu a {
+        padding: 8px 10px;
+        font-size: 0.82rem;
+    }
+
+    .seccion {
+        padding: 28px;
+    }
+
+    .presentacion,
+    .contenido-historia,
+    .favorito-contenido {
+        gap: 25px;
+    }
+
+    .fotos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gif-galeria {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .foto-presentacion {
+        min-width: 210px;
+        height: 280px;
+    }
+
+}
+
+
+/* =========================================
+   24. CELULARES
+========================================= */
+
+@media (max-width: 600px) {
+
+    /* Banner */
+
+    .portada {
+        min-height: 570px;
+
+        padding: 120px 18px 45px;
+    }
+
+    .logos {
+        top: 14px;
+        left: 14px;
+        right: 14px;
+    }
+
+    .logos img {
+        width: 60px;
+        height: 60px;
+
+        border-radius: 13px;
+    }
+
+    .contenido-portada {
+        margin-top: 10px;
+    }
+
+    .portada h1 {
+        font-size: clamp(2rem, 9vw, 2.8rem);
+    }
+
+    .portada h2 {
+        font-size: 1.1rem;
+    }
+
+    .portada p {
+        font-size: 1rem;
+    }
+
+    .decoracion {
+        font-size: 2rem;
+    }
+
+    .decoracion-1 {
+        left: 5%;
+        bottom: 15px;
+    }
+
+    .decoracion-2 {
+        right: 5%;
+        top: 25%;
+    }
+
+
+    /* Botones */
+
+    .boton {
+        padding: 11px 16px;
+        font-size: 0.9rem;
+    }
+
+
+    /* Menú */
+
+    .menu {
+        gap: 4px;
+        padding: 9px 6px;
+    }
+
+    .menu a {
+        flex: 0 1 auto;
+
+        padding: 8px 9px;
+
+        font-size: 0.76rem;
+        border-radius: 12px;
+    }
+
+
+    /* Secciones */
+
+    .seccion {
+        width: 94%;
+
+        margin: 25px auto;
+        padding: 21px;
+
+        border-radius: 20px;
+
+        scroll-margin-top: 125px;
+    }
+
+    .titulo-seccion {
+        margin-bottom: 24px;
+    }
+
+    .titulo-seccion h2 {
+        font-size: 1.7rem;
+    }
+
+
+    /* Presentación e historia */
+
+    .presentacion,
+    .contenido-historia,
+    .favorito-contenido {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .foto-presentacion {
+        width: 100%;
+        min-width: 0;
+        height: 250px;
+
+        border-radius: 22px;
+    }
+
+    .gif-marco {
+        width: 100%;
+        max-width: 320px;
+
+        margin: 0 auto;
+    }
+
+
+    /* Tarjetas */
+
+    .tarjetas {
+        gap: 18px;
+    }
+
+    .tarjeta {
+        flex: 1 1 100%;
+        max-width: 100%;
+
+        padding: 20px;
+    }
+
+    .tarjeta img {
+        height: 210px;
+    }
+
+
+    /* Galería */
+
+    .fotos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .fotos img {
+        height: 145px;
+    }
+
+    .fotos figcaption {
+        padding: 9px;
+        font-size: 0.85rem;
+    }
+
+
+    /* Multimedia */
+
+    .gif-galeria {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .gif-tarjeta {
+        padding: 9px;
+    }
+
+    .gif-tarjeta img {
+        height: 115px;
+    }
+
+
+    /* Lugar favorito */
+
+    .favorito-contenido img {
+        width: 100%;
+        height: 230px;
+
+        border-radius: 22px;
+    }
+
+
+    /* Tabla */
+
+    .tabla-contenedor {
+        border-radius: 10px;
+    }
+
+    table {
+        min-width: 650px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        font-size: 0.88rem;
+    }
+
+
+    /* Opinión */
+
+    .opinion-tarjeta {
+        padding: 21px;
+    }
+
+
+    /* Generación */
+
+    .homenaje {
+        padding: 45px 20px;
+        scroll-margin-top: 100px;
+    }
+
+    .homenaje h1 {
+        font-size: 4rem;
+    }
+
+
+    /* Pie de página */
+
+    .final {
+        padding: 35px 18px;
+    }
+
+    .creditos {
+        overflow-wrap: anywhere;
+    }
+
+
+    /* Botón superior */
+
+    .volver-arriba {
+        width: 44px;
+        height: 44px;
+
+        right: 12px;
+        bottom: 12px;
+    }
+
+}
+
+
+/* =========================================
+   25. CELULARES MUY PEQUEÑOS
+========================================= */
+
+@media (max-width: 380px) {
+
+    .portada h1 {
+        font-size: 1.9rem;
+    }
+
+    .portada h2 {
+        font-size: 1rem;
+    }
+
+    .menu a {
+        padding: 7px;
+        font-size: 0.7rem;
+    }
+
+    .seccion {
+        padding: 17px;
+    }
+
+    .fotos {
+        grid-template-columns: 1fr;
+    }
+
+    .fotos img {
+        height: 200px;
+    }
+
+    .gif-galeria {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+/* =========================================
+   26. ACCESIBILIDAD
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}
