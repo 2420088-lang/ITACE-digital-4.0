@@ -1,253 +1,294 @@
-// ===================================
-// 1. CAMBIAR LA APARIENCIA
-// ===================================
+document.addEventListener("DOMContentLoaded", () => {
 
-const botonTema = document.getElementById("botonTema");
+    // Elementos principales
+    const botonTema = document.getElementById("botonTema");
+    const botonMenu = document.getElementById("botonMenu");
+    const menu = document.getElementById("menu");
 
-if (botonTema) {
+    // Tema claro y oscuro
+    if (botonTema) {
+        botonTema.addEventListener("click", () => {
+            document.body.classList.toggle("modo-oscuro");
 
-    botonTema.addEventListener("click", function () {
+            const oscuro = document.body.classList.contains("modo-oscuro");
+            botonTema.textContent = oscuro ? "☀️ Modo claro" : "🌙 Modo oscuro";
 
-        document.body.classList.toggle("modo-oscuro");
+            localStorage.setItem("temaITACE", oscuro ? "oscuro" : "claro");
+        });
+    }
 
-        if (document.body.classList.contains("modo-oscuro")) {
-            botonTema.textContent = "☀️ Cambiar a modo claro";
-        } else {
-            botonTema.textContent = "🌙 Cambiar apariencia";
-        }
+    if (localStorage.getItem("temaITACE") === "oscuro") {
+        document.body.classList.add("modo-oscuro");
+        if (botonTema) botonTema.textContent = "☀️ Modo claro";
+    }
 
-    });
+    // Menú para celular
+    if (botonMenu && menu) {
+        botonMenu.addEventListener("click", () => {
+            menu.classList.toggle("menu-abierto");
 
-}
-
-
-// ===================================
-// 2. MOSTRAR Y OCULTAR INFORMACIÓN
-// ===================================
-
-const botonHistoria = document.getElementById("botonHistoria");
-const historiaExtra = document.getElementById("historiaExtra");
-
-if (botonHistoria && historiaExtra) {
-
-    botonHistoria.addEventListener("click", function () {
-
-        historiaExtra.classList.toggle("visible");
-
-        if (historiaExtra.classList.contains("visible")) {
-            botonHistoria.textContent = "Ocultar información";
-        } else {
-            botonHistoria.textContent = "Leer información adicional";
-        }
-
-    });
-
-}
-
-
-// ===================================
-// 3. MOSTRAR CURIOSIDADES DE ITACE
-// ===================================
-
-const botonCuriosidad = document.getElementById("botonCuriosidad");
-const datoCurioso = document.getElementById("datoCurioso");
-
-const curiosidades = [
-
-    "ITACE significa Instituto Tamaulipeco de Capacitación para el Empleo.",
-
-    "La programación permite crear páginas web, aplicaciones y soluciones digitales.",
-
-    "La ciberseguridad ayuda a proteger la información y los sistemas digitales.",
-
-    "El diseño gráfico digital combina imágenes, colores y tipografía para comunicar ideas.",
-
-    "La logística ayuda a organizar el almacenamiento y el transporte de productos.",
-
-    "El mantenimiento industrial permite conservar los equipos en buenas condiciones.",
-
-    "El mantenimiento automotriz se enfoca en revisar y conservar los vehículos.",
-
-    "Los semiconductores son fundamentales para fabricar muchos dispositivos electrónicos.",
-
-    "La inteligencia artificial permite desarrollar sistemas capaces de realizar tareas que requieren capacidades humanas.",
-
-    "Aprender habilidades técnicas puede ayudar a prepararse para diferentes oportunidades laborales."
-
-];
-
-let indiceCuriosidad = -1;
-
-if (botonCuriosidad && datoCurioso) {
-
-    botonCuriosidad.addEventListener("click", function () {
-
-        let nuevoIndice;
-
-        do {
-
-            nuevoIndice = Math.floor(
-                Math.random() * curiosidades.length
-            );
-
-        } while (
-            curiosidades.length > 1 &&
-            nuevoIndice === indiceCuriosidad
-        );
-
-        indiceCuriosidad = nuevoIndice;
-
-        datoCurioso.textContent = curiosidades[indiceCuriosidad];
-
-    });
-
-}
-
-
-// ===================================
-// 4. BOTÓN PARA VOLVER ARRIBA
-// ===================================
-
-const botonArriba = document.getElementById("volverArriba");
-
-if (botonArriba) {
-
-    window.addEventListener("scroll", function () {
-
-        if (window.scrollY > 400) {
-            botonArriba.classList.add("visible");
-        } else {
-            botonArriba.classList.remove("visible");
-        }
-
-    });
-
-    botonArriba.addEventListener("click", function () {
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+            const abierto = menu.classList.contains("menu-abierto");
+            botonMenu.setAttribute("aria-expanded", abierto);
         });
 
-    });
-
-}
-
-
-// ===================================
-// 5. MARCAR LA SECCIÓN ACTUAL DEL MENÚ
-// ===================================
-
-const enlacesMenu = document.querySelectorAll(".menu a");
-
-const secciones = document.querySelectorAll(
-    "main section[id], header[id], footer[id]"
-);
-
-function actualizarMenu() {
-
-    let seccionActual = "";
-
-    secciones.forEach(function (seccion) {
-
-        const posicion = seccion.getBoundingClientRect();
-
-        if (
-            posicion.top <= 160 &&
-            posicion.bottom > 160
-        ) {
-            seccionActual = seccion.id;
-        }
-
-    });
-
-    enlacesMenu.forEach(function (enlace) {
-
-        enlace.classList.remove("activo");
-
-        if (
-            seccionActual &&
-            enlace.getAttribute("href") === "#" + seccionActual
-        ) {
-            enlace.classList.add("activo");
-        }
-
-    });
-
-}
-
-window.addEventListener("scroll", actualizarMenu);
-
-actualizarMenu();
-
-
-// ===================================
-// 6. ANIMACIÓN DE LAS TARJETAS
-// ===================================
-
-const elementosAnimados = document.querySelectorAll(
-    ".tarjeta, .fotos figure, .gif-tarjeta, .dato-curioso"
-);
-
-if ("IntersectionObserver" in window) {
-
-    const observador = new IntersectionObserver(
-        function (entradas) {
-
-            entradas.forEach(function (entrada) {
-
-                if (entrada.isIntersecting) {
-
-                    entrada.target.classList.add("aparecio");
-
-                    observador.unobserve(entrada.target);
-
-                }
-
+        menu.querySelectorAll("a").forEach(enlace => {
+            enlace.addEventListener("click", () => {
+                menu.classList.remove("menu-abierto");
+                botonMenu.setAttribute("aria-expanded", "false");
             });
+        });
+    }
 
-        },
-        {
-            threshold: 0.15
-        }
+    // Cerrar el menú al cambiar de sección
+    document.querySelectorAll('a[href^="#"]').forEach(enlace => {
+        enlace.addEventListener("click", () => {
+            const destino = document.querySelector(enlace.getAttribute("href"));
+
+            if (destino) {
+                destino.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+        });
+    });
+
+    // Mostrar elementos al desplazarse
+    const elementos = document.querySelectorAll(
+        ".revelar, .tarjeta, .evento, .instalacion-card"
     );
 
-    elementosAnimados.forEach(function (elemento) {
+    if ("IntersectionObserver" in window) {
+        const observador = new IntersectionObserver((entradas) => {
+            entradas.forEach(entrada => {
+                if (entrada.isIntersecting) {
+                    entrada.target.classList.add("visible");
+                    observador.unobserve(entrada.target);
+                }
+            });
+        }, { threshold: 0.12 });
 
-        observador.observe(elemento);
+        elementos.forEach(elemento => observador.observe(elemento));
+    } else {
+        elementos.forEach(elemento => elemento.classList.add("visible"));
+    }
 
+    // Historia desplegable
+    const botonHistoria = document.getElementById("botonHistoria");
+    const ventanaHistoria = document.getElementById("ventanaHistoria");
+
+    if (botonHistoria && ventanaHistoria) {
+        botonHistoria.addEventListener("click", () => {
+            const expandida = ventanaHistoria.classList.toggle("historia-abierta");
+
+            botonHistoria.textContent = expandida
+                ? "Leer menos ▲"
+                : "Conocer más ▼";
+
+            botonHistoria.setAttribute("aria-expanded", expandida);
+        });
+    }
+
+    // Curiosidades del ITACE
+    const curiosidades = [
+        "El trabajo en equipo ayuda a desarrollar nuevas habilidades.",
+        "Los proyectos escolares permiten aplicar lo aprendido en clase.",
+        "La programación combina lógica, creatividad y solución de problemas.",
+        "Las actividades culturales fomentan la convivencia estudiantil.",
+        "Aprender una especialidad técnica puede abrir nuevas oportunidades."
+    ];
+
+    const botonCuriosidad = document.getElementById("botonCuriosidad");
+    const textoCuriosidad = document.getElementById("textoCuriosidad");
+
+    if (botonCuriosidad && textoCuriosidad) {
+        botonCuriosidad.addEventListener("click", () => {
+            const actual = textoCuriosidad.textContent;
+            let nueva;
+
+            do {
+                nueva = curiosidades[
+                    Math.floor(Math.random() * curiosidades.length)
+                ];
+            } while (nueva === actual && curiosidades.length > 1);
+
+            textoCuriosidad.textContent = nueva;
+        });
+    }
+
+    // Preguntas frecuentes
+    document.querySelectorAll(".pregunta-faq").forEach(pregunta => {
+        pregunta.addEventListener("click", () => {
+            const respuesta = pregunta.nextElementSibling;
+            const abierta = pregunta.getAttribute("aria-expanded") === "true";
+
+            pregunta.setAttribute("aria-expanded", String(!abierta));
+
+            if (respuesta) {
+                respuesta.hidden = abierta;
+            }
+        });
     });
 
-}
+    // Carruseles 3D
+    document.querySelectorAll("[data-carrusel]").forEach(carrusel => {
+        const tarjetas = Array.from(
+            carrusel.querySelectorAll(".tarjeta-carrusel")
+        );
 
+        const anterior = carrusel.querySelector(".carrusel-anterior");
+        const siguiente = carrusel.querySelector(".carrusel-siguiente");
+        const puntos = carrusel.querySelector(".carrusel-puntos");
 
-// ===================================
-// 7. ANIMACIÓN AL APARECER
-// ===================================
+        if (!tarjetas.length) return;
 
-const estiloAnimacion = document.createElement("style");
+        let posicion = tarjetas.findIndex(tarjeta =>
+            tarjeta.classList.contains("activa")
+        );
 
-estiloAnimacion.textContent = `
+        if (posicion < 0) posicion = 0;
 
-    .tarjeta,
-    .fotos figure,
-    .gif-tarjeta,
-    .dato-curioso {
-        opacity: 0;
-        transform: translateY(20px);
-        transition:
-            opacity 0.6s ease,
-            transform 0.6s ease;
+        function mostrarCarrusel() {
+            tarjetas.forEach((tarjeta, indice) => {
+                tarjeta.classList.remove(
+                    "activa",
+                    "lado-izquierdo",
+                    "lado-derecho"
+                );
+
+                tarjeta.removeAttribute("aria-current");
+
+                if (indice === posicion) {
+                    tarjeta.classList.add("activa");
+                    tarjeta.setAttribute("aria-current", "true");
+                } else if (
+                    indice === (posicion - 1 + tarjetas.length) % tarjetas.length
+                ) {
+                    tarjeta.classList.add("lado-izquierdo");
+                } else if (
+                    indice === (posicion + 1) % tarjetas.length
+                ) {
+                    tarjeta.classList.add("lado-derecho");
+                }
+            });
+
+            if (puntos) {
+                puntos.querySelectorAll("button").forEach((punto, indice) => {
+                    punto.classList.toggle("activo", indice === posicion);
+                    punto.setAttribute(
+                        "aria-current",
+                        indice === posicion ? "true" : "false"
+                    );
+                });
+            }
+        }
+
+        function crearPuntos() {
+            if (!puntos) return;
+
+            puntos.innerHTML = "";
+
+            tarjetas.forEach((tarjeta, indice) => {
+                const punto = document.createElement("button");
+                punto.type = "button";
+                punto.textContent = String(indice + 1);
+                punto.setAttribute(
+                    "aria-label",
+                    `Mostrar elemento ${indice + 1}`
+                );
+
+                punto.addEventListener("click", () => {
+                    posicion = indice;
+                    mostrarCarrusel();
+                });
+
+                puntos.appendChild(punto);
+            });
+        }
+
+        if (anterior) {
+            anterior.addEventListener("click", () => {
+                posicion = (posicion - 1 + tarjetas.length) % tarjetas.length;
+                mostrarCarrusel();
+            });
+        }
+
+        if (siguiente) {
+            siguiente.addEventListener("click", () => {
+                posicion = (posicion + 1) % tarjetas.length;
+                mostrarCarrusel();
+            });
+        }
+
+        tarjetas.forEach((tarjeta, indice) => {
+            tarjeta.addEventListener("click", () => {
+                if (indice !== posicion) {
+                    posicion = indice;
+                    mostrarCarrusel();
+                }
+            });
+        });
+
+        crearPuntos();
+        mostrarCarrusel();
+    });
+
+    // Buscar docentes
+    const buscadorDocentes = document.getElementById("buscadorDocentes");
+    const tarjetasDocentes = document.querySelectorAll(".tarjeta-docente");
+    const mensajeSinDocentes = document.getElementById("sinDocentes");
+
+    function filtrarDocentes() {
+        if (!buscadorDocentes) return;
+
+        const busqueda = buscadorDocentes.value
+            .trim()
+            .toLocaleLowerCase("es");
+
+        let encontrados = 0;
+
+        tarjetasDocentes.forEach(tarjeta => {
+            const contenido = tarjeta.textContent.toLocaleLowerCase("es");
+            const coincide = contenido.includes(busqueda);
+
+            tarjeta.hidden = !coincide;
+
+            if (coincide) encontrados++;
+        });
+
+        if (mensajeSinDocentes) {
+            mensajeSinDocentes.hidden = encontrados !== 0;
+        }
     }
 
-    .tarjeta.aparecio,
-    .fotos figure.aparecio,
-    .gif-tarjeta.aparecio,
-    .dato-curioso.aparecio {
-        opacity: 1;
-        transform: translateY(0);
+    if (buscadorDocentes) {
+        buscadorDocentes.addEventListener("input", filtrarDocentes);
     }
 
-`;
+    // Botón para subir
+    const botonArriba = document.getElementById("botonArriba");
 
-document.head.appendChild(estiloAnimacion);
+    function revisarDesplazamiento() {
+        if (botonArriba) {
+            botonArriba.classList.toggle("mostrar", window.scrollY > 350);
+        }
+    }
+
+    window.addEventListener("scroll", revisarDesplazamiento);
+    revisarDesplazamiento();
+
+    if (botonArriba) {
+        botonArriba.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    }
+
+    // Año del pie de página
+    document.querySelectorAll(".anio-actual").forEach(elemento => {
+        elemento.textContent = new Date().getFullYear();
+    });
+
+});
